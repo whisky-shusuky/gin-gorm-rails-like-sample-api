@@ -2,7 +2,7 @@ package user
 
 import (
 	"fmt"
-	user "gin-gorm-tutorial/service"
+	user "gin-gorm-viron/service"
 
 	"github.com/gin-gonic/gin"
 )

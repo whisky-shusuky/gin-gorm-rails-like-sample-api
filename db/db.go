@@ -1,10 +1,10 @@
 package db
 
 import (
-	"gin-gorm-tutorial/entity"
+	"gin-gorm-viron/entity"
 
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres" // Use PostgreSQL in gorm
+	_ "github.com/jinzhu/gorm/dialects/mysql" // Use PostgreSQL in gorm
 )
 
 var (
@@ -14,7 +14,10 @@ var (
 
 // Init is initialize db from main function
 func Init() {
-	db, err = gorm.Open("mysql", "host=0.0.0.0 port=5432 user=gorm dbname=gorm password=gorm sslmode=disable")
+	// TODO: dockerに繋ぎこむのに失敗したためローカルのmysqlに繋ぎ混んでいる。
+	DBMS := "mysql"
+	CONNECT := "root:@/gin_gorm_viron"
+	db, err = gorm.Open(DBMS, CONNECT)
 	if err != nil {
 		panic(err)
 	}

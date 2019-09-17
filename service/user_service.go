@@ -1,8 +1,8 @@
 package user
 
 import (
-	"gin-gorm-tutorial/db"
-	"gin-gorm-tutorial/entity"
+	"gin-gorm-viron/db"
+	"gin-gorm-viron/entity"
 
 	"github.com/gin-gonic/gin"
 )
