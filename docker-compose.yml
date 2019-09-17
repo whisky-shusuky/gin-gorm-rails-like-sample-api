@@ -1,0 +1,10 @@
+  db:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_USER: gorm
+      MYSQL_PASSWORD: gorm
+      MYSQL_DATABASE: gorm
+    ports:
+      - 5432:5432
