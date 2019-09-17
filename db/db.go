@@ -1,6 +1,8 @@
 package db
 
 import (
+	"gin-gorm-tutorial/entity"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres" // Use PostgreSQL in gorm
 )
@@ -16,6 +18,7 @@ func Init() {
 	if err != nil {
 		panic(err)
 	}
+	autoMigration()
 }
 
 // GetDB is called in models
@@ -28,4 +31,8 @@ func Close() {
 	if err := db.Close(); err != nil {
 		panic(err)
 	}
+}
+
+func autoMigration() {
+	db.AutoMigrate(&entity.User{})
 }
