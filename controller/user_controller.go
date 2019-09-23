@@ -1,4 +1,4 @@
-package user
+package controller
 
 import (
 	"fmt"
@@ -7,11 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Controller is user controlller
-type Controller struct{}
+// UserController is user controlller
+type UserController struct{}
 
 // Index action: GET /users
-func (pc Controller) Index(c *gin.Context) {
+func (pc UserController) Index(c *gin.Context) {
 	var s user.Service
 	p, err := s.GetAll()
 
@@ -24,7 +24,7 @@ func (pc Controller) Index(c *gin.Context) {
 }
 
 // Create action: POST /users
-func (pc Controller) Create(c *gin.Context) {
+func (pc UserController) Create(c *gin.Context) {
 	var s user.Service
 	p, err := s.CreateModel(c)
 
@@ -37,7 +37,7 @@ func (pc Controller) Create(c *gin.Context) {
 }
 
 // Show action: GET /users/:id
-func (pc Controller) Show(c *gin.Context) {
+func (pc UserController) Show(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var s user.Service
 	p, err := s.GetByID(id)
@@ -51,7 +51,7 @@ func (pc Controller) Show(c *gin.Context) {
 }
 
 // Update action: PUT /users/:id
-func (pc Controller) Update(c *gin.Context) {
+func (pc UserController) Update(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var s user.Service
 	p, err := s.UpdateByID(id, c)
@@ -65,7 +65,7 @@ func (pc Controller) Update(c *gin.Context) {
 }
 
 // Delete action: DELETE /users/:id
-func (pc Controller) Delete(c *gin.Context) {
+func (pc UserController) Delete(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var s user.Service
 
