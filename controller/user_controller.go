@@ -10,8 +10,8 @@ import (
 // UserController is user controlller
 type UserController struct{}
 
-// Index action: GET /users
-func (pc UserController) Index(c *gin.Context) {
+// IndexUser action: GET /users
+func (pc UserController) IndexUser(c *gin.Context) {
 	var s user.Service
 	p, err := s.GetAll()
 
@@ -23,8 +23,8 @@ func (pc UserController) Index(c *gin.Context) {
 	}
 }
 
-// Create action: POST /users
-func (pc UserController) Create(c *gin.Context) {
+// CreateUser action: POST /users
+func (pc UserController) CreateUser(c *gin.Context) {
 	var s user.Service
 	p, err := s.CreateModel(c)
 
@@ -36,8 +36,8 @@ func (pc UserController) Create(c *gin.Context) {
 	}
 }
 
-// Show action: GET /users/:id
-func (pc UserController) Show(c *gin.Context) {
+// ShowUser action: GET /users/:id
+func (pc UserController) ShowUser(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var s user.Service
 	p, err := s.GetByID(id)
@@ -50,8 +50,8 @@ func (pc UserController) Show(c *gin.Context) {
 	}
 }
 
-// Update action: PUT /users/:id
-func (pc UserController) Update(c *gin.Context) {
+// UpdateUser action: PUT /users/:id
+func (pc UserController) UpdateUser(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var s user.Service
 	p, err := s.UpdateByID(id, c)
@@ -64,8 +64,8 @@ func (pc UserController) Update(c *gin.Context) {
 	}
 }
 
-// Delete action: DELETE /users/:id
-func (pc UserController) Delete(c *gin.Context) {
+// DeleteUser action: DELETE /users/:id
+func (pc UserController) DeleteUser(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var s user.Service
 

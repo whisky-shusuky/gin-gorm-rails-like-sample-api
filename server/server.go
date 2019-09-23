@@ -18,21 +18,17 @@ func router() *gin.Engine {
 	users := r.Group("/users")
 	{
 		ctrl := controller.UserController{}
-		users.GET("", ctrl.Index)
-		users.GET("/:id", ctrl.Show)
-		users.POST("/", ctrl.Create)
-		users.PUT("/:id", ctrl.Update)
-		users.DELETE("/:id", ctrl.Delete)
+		users.GET("", ctrl.IndexUser)
+		users.GET("/:id", ctrl.ShowUser)
+		users.POST("/", ctrl.CreateUser)
+		users.PUT("/:id", ctrl.UpdateUser)
+		users.DELETE("/:id", ctrl.DeleteUser)
 	}
 
-	swagger := r.Group("/swagger")
+	swagger := r.Group("/")
 	{
-		ctrl := controller.UserController{}
-		swagger.GET("", ctrl.Index)
-		swagger.GET("/:id", ctrl.Show)
-		swagger.POST("/", ctrl.Create)
-		swagger.PUT("/:id", ctrl.Update)
-		swagger.DELETE("/:id", ctrl.Delete)
+		ctrl := controller.SwaggerController{}
+		swagger.GET("/swagger.json", ctrl.ShowSwagger)
 	}
 	return r
 }
