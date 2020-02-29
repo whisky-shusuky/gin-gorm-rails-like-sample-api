@@ -2,7 +2,7 @@ package db
 
 import (
 	"gin-gorm-rails-like-sample-api/config"
-	"gin-gorm-rails-like-sample-api/entity"
+	"gin-gorm-rails-like-sample-api/model"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql" // Use <ysql in gorm
@@ -42,5 +42,5 @@ func Close() {
 }
 
 func autoMigration() {
-	Db.AutoMigrate(&entity.User{})
+	Db.AutoMigrate(&model.User{})
 }

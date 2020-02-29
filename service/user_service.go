@@ -2,14 +2,14 @@ package user
 
 import (
 	"gin-gorm-rails-like-sample-api/db"
-	"gin-gorm-rails-like-sample-api/entity"
+	"gin-gorm-rails-like-sample-api/model"
 
 	"github.com/gin-gonic/gin"
 )
 
 type Service struct{}
 
-type User entity.User
+type User model.User
 
 // GetAll is get all User
 func (s Service) GetAll() ([]User, error) {

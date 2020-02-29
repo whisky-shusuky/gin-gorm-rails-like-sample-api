@@ -1,4 +1,4 @@
-package entity
+package model
 
 // User is user models property
 type User struct {
