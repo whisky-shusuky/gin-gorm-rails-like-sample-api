@@ -1,23 +1,28 @@
 package db
 
 import (
-	"gin-gorm-viron/entity"
+	"gin-gorm-rails-like-sample-api/config"
+	"gin-gorm-rails-like-sample-api/entity"
 
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql" // Use PostgreSQL in gorm
+	_ "github.com/jinzhu/gorm/dialects/mysql" // Use <ysql in gorm
 )
 
 var (
-	db  *gorm.DB
+	// Db is database.
+	Db  *gorm.DB
 	err error
 )
 
 // Init is initialize db from main function
 func Init() {
-	// TODO: dockerに繋ぎこむのに失敗したためローカルのmysqlに繋ぎ混んでいる。
-	DBMS := "mysql"
-	CONNECT := "root:@/gin_gorm_viron"
-	db, err = gorm.Open(DBMS, CONNECT)
+	configs, err := config.GetConfigs()
+	if err != nil {
+		panic(err)
+	}
+
+	Db, err = gorm.Open(configs.Database.Dialect, configs.Database.DataSource)
+	Db.LogMode(true)
 	if err != nil {
 		panic(err)
 	}
@@ -26,16 +31,16 @@ func Init() {
 
 // GetDB is called in models
 func GetDB() *gorm.DB {
-	return db
+	return Db
 }
 
 // Close is closing db
 func Close() {
-	if err := db.Close(); err != nil {
+	if err := Db.Close(); err != nil {
 		panic(err)
 	}
 }
 
 func autoMigration() {
-	db.AutoMigrate(&entity.User{})
+	Db.AutoMigrate(&entity.User{})
 }

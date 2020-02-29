@@ -1,0 +1,4 @@
+database:
+  dialect: mysql
+  datasource: "root@tcp(db)/sample?parseTime=true"
+  
