@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gin-gorm-viron/db"
-	"gin-gorm-viron/server"
+	"gin-gorm-rails-like-sample-api/db"
+	"gin-gorm-rails-like-sample-api/server"
 )
 
 func main() {

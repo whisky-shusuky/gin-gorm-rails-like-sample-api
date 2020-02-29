@@ -2,7 +2,7 @@ package controller
 
 import (
 	"fmt"
-	user "gin-gorm-viron/service"
+	user "gin-gorm-rails-like-sample-api/service"
 
 	"github.com/gin-gonic/gin"
 )
