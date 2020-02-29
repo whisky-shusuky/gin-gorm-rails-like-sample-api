@@ -1,8 +1,31 @@
+version: '3'
+services:
+  go:
+    image: sample-go
+    depends_on:
+      - db
+    build: ./docker/go
+    container_name: go
+    volumes:
+      - .:/var/src/gin-gorm-rails-like-sample-api
+    working_dir: /go/src/gin-gorm-rails-like-sample-api
+    command:
+       - sh
+       - -c
+       - reflex -r '(\.go\z|go\.mod\z)' -s -- sh -c 'go run main.go'
+    environment:
+      - TZ=Asia/Tokyo
+      - ENV_GO=development
+        
   db:
     image: mysql:5.7
-    restart: always
+    container_name: mysql
+    command: mysqld --sql_mode=""
     environment:
-      MYSQL_DATABASE: gorm
-      MYSQL_USER: gorm
-      MYSQL_PASSWORD: gorm
-      MYSQL_ROOT_PASSWORD: gorm
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+      - MYSQL_DATABASE=sample
+      - TZ=Asia/Tokyo
+    volumes:
+      - "./sql:/docker-entrypoint-initdb.d"
+      - "./etc/development/mysql/my.cnf:/etc/mysql/conf.d/my.cnf"
+      - "./mysql_data:/var/lib/mysql"
