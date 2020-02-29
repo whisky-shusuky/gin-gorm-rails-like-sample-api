@@ -1,0 +1,10 @@
+vendor/*
+!vendor/vendor.json
+coverage.out
+count.out
+test
+profile.out
+tmp.out
+
+# mysql data directory for docker volume
+mysql_data/*
