@@ -1,7 +1,7 @@
 package server
 
 import (
-	"gin-gorm-viron/controller"
+	"gin-gorm-rails-like-sample-api/controller"
 
 	"github.com/gin-gonic/gin"
 )
