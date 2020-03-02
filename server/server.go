@@ -25,10 +25,5 @@ func router() *gin.Engine {
 		users.DELETE("/:id", ctrl.DeleteUser)
 	}
 
-	swagger := r.Group("/")
-	{
-		ctrl := controller.SwaggerController{}
-		swagger.GET("/swagger.json", ctrl.ShowSwagger)
-	}
 	return r
 }

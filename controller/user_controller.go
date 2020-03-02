@@ -2,7 +2,7 @@ package controller
 
 import (
 	"fmt"
-	user "gin-gorm-rails-like-sample-api/service"
+	"gin-gorm-rails-like-sample-api/model"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,35 +12,32 @@ type UserController struct{}
 
 // IndexUser action: GET /users
 func (pc UserController) IndexUser(c *gin.Context) {
-	var s user.Service
-	p, err := s.GetAll()
+	users, err := model.GetUserAll()
 
 	if err != nil {
 		c.AbortWithStatus(404)
 		fmt.Println(err)
 	} else {
-		c.JSON(200, p)
+		c.JSON(200, users)
 	}
 }
 
 // CreateUser action: POST /users
 func (pc UserController) CreateUser(c *gin.Context) {
-	var s user.Service
-	p, err := s.CreateModel(c)
+	_, err := model.CreateUser(c)
 
 	if err != nil {
 		c.AbortWithStatus(400)
 		fmt.Println(err)
 	} else {
-		c.JSON(201, p)
+		c.JSON(204, nil)
 	}
 }
 
 // ShowUser action: GET /users/:id
 func (pc UserController) ShowUser(c *gin.Context) {
 	id := c.Params.ByName("id")
-	var s user.Service
-	p, err := s.GetByID(id)
+	p, err := model.GetUserByID(id)
 
 	if err != nil {
 		c.AbortWithStatus(404)
@@ -53,8 +50,7 @@ func (pc UserController) ShowUser(c *gin.Context) {
 // UpdateUser action: PUT /users/:id
 func (pc UserController) UpdateUser(c *gin.Context) {
 	id := c.Params.ByName("id")
-	var s user.Service
-	p, err := s.UpdateByID(id, c)
+	p, err := model.UpdateUserByID(id, c)
 
 	if err != nil {
 		c.AbortWithStatus(400)
@@ -67,9 +63,8 @@ func (pc UserController) UpdateUser(c *gin.Context) {
 // DeleteUser action: DELETE /users/:id
 func (pc UserController) DeleteUser(c *gin.Context) {
 	id := c.Params.ByName("id")
-	var s user.Service
 
-	if err := s.DeleteByID(id); err != nil {
+	if err := model.DeleteUserByID(id); err != nil {
 		c.AbortWithStatus(403)
 		fmt.Println(err)
 	} else {

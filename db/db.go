@@ -2,7 +2,6 @@ package db
 
 import (
 	"gin-gorm-rails-like-sample-api/config"
-	"gin-gorm-rails-like-sample-api/model"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql" // Use <ysql in gorm
@@ -26,7 +25,7 @@ func Init() {
 	if err != nil {
 		panic(err)
 	}
-	autoMigration()
+	//	autoMigration()
 }
 
 // GetDB is called in models
@@ -39,8 +38,4 @@ func Close() {
 	if err := Db.Close(); err != nil {
 		panic(err)
 	}
-}
-
-func autoMigration() {
-	Db.AutoMigrate(&model.User{})
 }
