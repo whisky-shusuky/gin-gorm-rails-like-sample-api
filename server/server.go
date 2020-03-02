@@ -20,7 +20,7 @@ func router() *gin.Engine {
 		ctrl := controller.UserController{}
 		users.GET("", ctrl.IndexUser)
 		users.GET("/:id", ctrl.ShowUser)
-		users.POST("/", ctrl.CreateUser)
+		users.POST("", ctrl.CreateUser)
 		users.PUT("/:id", ctrl.UpdateUser)
 		users.DELETE("/:id", ctrl.DeleteUser)
 	}
