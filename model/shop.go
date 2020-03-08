@@ -8,9 +8,9 @@ import (
 )
 
 // GetShopAll is get all Shop
-func GetShopAll() ([]entity.Shop, error) {
+func GetShopAll() ([]*entity.Shop, error) {
 	db := db.GetDB()
-	var u []entity.Shop
+	var u []*entity.Shop
 	if err := db.Find(&u).Error; err != nil {
 		return nil, err
 	}
@@ -19,48 +19,48 @@ func GetShopAll() ([]entity.Shop, error) {
 }
 
 // GetShopByID is get a Shop
-func GetShopByID(id string) (entity.Shop, error) {
+func GetShopByID(id string) (*entity.Shop, error) {
 	db := db.GetDB()
 	var u entity.Shop
 	if err := db.Where("id = ?", id).First(&u).Error; err != nil {
-		return u, err
+		return &u, err
 	}
 
-	return u, nil
+	return &u, nil
 }
 
 // CreateShop is create Shop model
-func CreateShop(c *gin.Context) (entity.Shop, error) {
+func CreateShop(c *gin.Context) (*entity.Shop, error) {
 	db := db.GetDB()
 	var u entity.Shop
 
 	if err := c.BindJSON(&u); err != nil {
-		return u, err
+		return nil, err
 	}
 
 	if err := db.Create(&u).Error; err != nil {
-		return u, err
+		return nil, err
 	}
 
-	return u, nil
+	return &u, nil
 }
 
 // UpdateShopByID is update a Shop
-func UpdateShopByID(id string, c *gin.Context) (entity.Shop, error) {
+func UpdateShopByID(id string, c *gin.Context) (*entity.Shop, error) {
 	db := db.GetDB()
 	var u entity.Shop
 
 	if err := db.Where("id = ?", id).First(&u).Error; err != nil {
-		return u, err
+		return nil, err
 	}
 
 	if err := c.BindJSON(&u); err != nil {
-		return u, err
+		return nil, err
 	}
 
 	db.Save(&u)
 
-	return u, nil
+	return &u, nil
 }
 
 // DeleteShopByID is delete a Shop

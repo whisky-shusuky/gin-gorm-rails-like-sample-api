@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"gin-gorm-rails-like-sample-api/model"
+	"gin-gorm-rails-like-sample-api/view"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,7 +19,7 @@ func (pc ShopController) IndexShop(c *gin.Context) {
 		c.AbortWithStatus(404)
 		fmt.Println(err)
 	} else {
-		c.JSON(200, shops)
+		view.RenderShops(c, shops)
 	}
 }
 
@@ -37,26 +38,26 @@ func (pc ShopController) CreateShop(c *gin.Context) {
 // ShowShop action: GET /shops/:id
 func (pc ShopController) ShowShop(c *gin.Context) {
 	id := c.Params.ByName("id")
-	p, err := model.GetShopByID(id)
+	shop, err := model.GetShopByID(id)
 
 	if err != nil {
 		c.AbortWithStatus(404)
 		fmt.Println(err)
 	} else {
-		c.JSON(200, p)
+		view.RenderShop(c, shop)
 	}
 }
 
 // UpdateShop action: PUT /shops/:id
 func (pc ShopController) UpdateShop(c *gin.Context) {
 	id := c.Params.ByName("id")
-	p, err := model.UpdateShopByID(id, c)
+	shop, err := model.UpdateShopByID(id, c)
 
 	if err != nil {
 		c.AbortWithStatus(400)
 		fmt.Println(err)
 	} else {
-		c.JSON(200, p)
+		view.RenderShop(c, shop)
 	}
 }
 
@@ -68,6 +69,6 @@ func (pc ShopController) DeleteShop(c *gin.Context) {
 		c.AbortWithStatus(403)
 		fmt.Println(err)
 	} else {
-		c.JSON(204, gin.H{"id #" + id: "deleted"})
+		c.JSON(204, nil)
 	}
 }
