@@ -6,9 +6,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type responseShops struct {
+	Shops []shop `json:"shops"`
+}
+
 // RenderShops render shops.
 func RenderShops(c *gin.Context, shops []*entity.Shop) {
-	c.JSON(200, convertToViewShops(shops))
+	c.JSON(200, responseShops{Shops: convertToViewShops(shops)})
 }
 
 // RenderShop render shop.
