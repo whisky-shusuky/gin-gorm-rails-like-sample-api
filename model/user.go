@@ -2,21 +2,15 @@ package model
 
 import (
 	"gin-gorm-rails-like-sample-api/db"
+	"gin-gorm-rails-like-sample-api/model/entity"
 
 	"github.com/gin-gonic/gin"
 )
 
-// User is user models property
-type User struct {
-	ID        uint   `json:"id"`
-	FirstName string `json:"firstname"`
-	LastName  string `json:"lastname"`
-}
-
 // GetUserAll is get all User
-func GetUserAll() ([]User, error) {
+func GetUserAll() ([]entity.User, error) {
 	db := db.GetDB()
-	var u []User
+	var u []entity.User
 	if err := db.Find(&u).Error; err != nil {
 		return nil, err
 	}
@@ -25,9 +19,9 @@ func GetUserAll() ([]User, error) {
 }
 
 // GetUserByID is get a User
-func GetUserByID(id string) (User, error) {
+func GetUserByID(id string) (entity.User, error) {
 	db := db.GetDB()
-	var u User
+	var u entity.User
 	if err := db.Where("id = ?", id).First(&u).Error; err != nil {
 		return u, err
 	}
@@ -36,9 +30,9 @@ func GetUserByID(id string) (User, error) {
 }
 
 // CreateUser is create User model
-func CreateUser(c *gin.Context) (User, error) {
+func CreateUser(c *gin.Context) (entity.User, error) {
 	db := db.GetDB()
-	var u User
+	var u entity.User
 
 	if err := c.BindJSON(&u); err != nil {
 		return u, err
@@ -52,9 +46,9 @@ func CreateUser(c *gin.Context) (User, error) {
 }
 
 // UpdateUserByID is update a User
-func UpdateUserByID(id string, c *gin.Context) (User, error) {
+func UpdateUserByID(id string, c *gin.Context) (entity.User, error) {
 	db := db.GetDB()
-	var u User
+	var u entity.User
 
 	if err := db.Where("id = ?", id).First(&u).Error; err != nil {
 		return u, err
@@ -72,7 +66,7 @@ func UpdateUserByID(id string, c *gin.Context) (User, error) {
 // DeleteUserByID is delete a User
 func DeleteUserByID(id string) error {
 	db := db.GetDB()
-	var u User
+	var u entity.User
 
 	if err := db.Where("id = ?", id).Delete(&u).Error; err != nil {
 		return err
