@@ -42,5 +42,5 @@ func Close() {
 }
 
 func autoMigration() {
-	Db.AutoMigrate(&entity.User{})
+	Db.AutoMigrate(&entity.Shop{})
 }

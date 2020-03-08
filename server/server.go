@@ -15,14 +15,14 @@ func Init() {
 func router() *gin.Engine {
 	r := gin.Default()
 
-	users := r.Group("/users")
+	shops := r.Group("/shops")
 	{
-		ctrl := controller.UserController{}
-		users.GET("", ctrl.IndexUser)
-		users.GET("/:id", ctrl.ShowUser)
-		users.POST("", ctrl.CreateUser)
-		users.PUT("/:id", ctrl.UpdateUser)
-		users.DELETE("/:id", ctrl.DeleteUser)
+		ctrl := controller.ShopController{}
+		shops.GET("", ctrl.IndexShop)
+		shops.GET("/:id", ctrl.ShowShop)
+		shops.POST("", ctrl.CreateShop)
+		shops.PUT("/:id", ctrl.UpdateShop)
+		shops.DELETE("/:id", ctrl.DeleteShop)
 	}
 
 	return r

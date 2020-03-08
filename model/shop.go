@@ -7,10 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetUserAll is get all User
-func GetUserAll() ([]entity.User, error) {
+// GetShopAll is get all Shop
+func GetShopAll() ([]entity.Shop, error) {
 	db := db.GetDB()
-	var u []entity.User
+	var u []entity.Shop
 	if err := db.Find(&u).Error; err != nil {
 		return nil, err
 	}
@@ -18,10 +18,10 @@ func GetUserAll() ([]entity.User, error) {
 	return u, nil
 }
 
-// GetUserByID is get a User
-func GetUserByID(id string) (entity.User, error) {
+// GetShopByID is get a Shop
+func GetShopByID(id string) (entity.Shop, error) {
 	db := db.GetDB()
-	var u entity.User
+	var u entity.Shop
 	if err := db.Where("id = ?", id).First(&u).Error; err != nil {
 		return u, err
 	}
@@ -29,10 +29,10 @@ func GetUserByID(id string) (entity.User, error) {
 	return u, nil
 }
 
-// CreateUser is create User model
-func CreateUser(c *gin.Context) (entity.User, error) {
+// CreateShop is create Shop model
+func CreateShop(c *gin.Context) (entity.Shop, error) {
 	db := db.GetDB()
-	var u entity.User
+	var u entity.Shop
 
 	if err := c.BindJSON(&u); err != nil {
 		return u, err
@@ -45,10 +45,10 @@ func CreateUser(c *gin.Context) (entity.User, error) {
 	return u, nil
 }
 
-// UpdateUserByID is update a User
-func UpdateUserByID(id string, c *gin.Context) (entity.User, error) {
+// UpdateShopByID is update a Shop
+func UpdateShopByID(id string, c *gin.Context) (entity.Shop, error) {
 	db := db.GetDB()
-	var u entity.User
+	var u entity.Shop
 
 	if err := db.Where("id = ?", id).First(&u).Error; err != nil {
 		return u, err
@@ -63,10 +63,10 @@ func UpdateUserByID(id string, c *gin.Context) (entity.User, error) {
 	return u, nil
 }
 
-// DeleteUserByID is delete a User
-func DeleteUserByID(id string) error {
+// DeleteShopByID is delete a Shop
+func DeleteShopByID(id string) error {
 	db := db.GetDB()
-	var u entity.User
+	var u entity.Shop
 
 	if err := db.Where("id = ?", id).Delete(&u).Error; err != nil {
 		return err
