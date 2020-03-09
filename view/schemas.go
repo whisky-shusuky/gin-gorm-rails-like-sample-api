@@ -10,5 +10,5 @@ type book struct {
 	ID              uint64 `json:"id"`
 	BookName        string `json:"book_name"`
 	BookDescription string `json:"book_description"`
-	Popularity      uint   `json:"popularity"`
+	Sales           uint   `json:"sales"`
 }

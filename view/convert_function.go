@@ -31,6 +31,6 @@ func convertToViewBook(before *entity.Book) book {
 		ID:              before.ID,
 		BookName:        before.BookName,
 		BookDescription: before.BookDescription,
-		Popularity:      before.Popularity,
+		Sales:           before.Sales,
 	}
 }

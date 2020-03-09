@@ -7,7 +7,7 @@ type Book struct {
 	ID              uint64 `gorm:"primary_key"`
 	BookName        string
 	BookDescription string
-	Popularity      uint
+	Sales           uint
 	CreatedAt       time.Time
 	DeletedAt       *time.Time
 }
