@@ -1,5 +1,16 @@
 version: '3'
 services:
+  www:
+    image: nginx:1.17.8
+    depends_on:
+      - go
+    volumes:
+      - ./etc/development/nginx.conf.d:/etc/nginx/conf.d
+    ports:
+      - "10080:80"
+    container_name: www
+    environment:
+      - TZ=Asia/Tokyo
   go:
     image: sample-go
     depends_on:
