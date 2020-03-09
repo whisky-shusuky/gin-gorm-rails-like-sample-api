@@ -7,7 +7,7 @@ import (
 )
 
 type responseBooks struct {
-	Books []book `json:"books"`
+	Books []bookWithRank `json:"books"`
 }
 
 // RenderBooks render books.
@@ -17,5 +17,12 @@ func RenderBooks(c *gin.Context, books []*entity.Book) {
 
 // RenderBook render book.
 func RenderBook(c *gin.Context, book *entity.Book) {
-	c.JSON(200, convertToViewBook(book))
+	bookWithRank := bookWithRank{
+		ID:              book.ID,
+		BookName:        book.BookName,
+		BookDescription: book.BookDescription,
+		Sales:           book.Sales,
+		Rank:            book.Rank(),
+	}
+	c.JSON(200, bookWithRank)
 }
