@@ -15,15 +15,21 @@ func Init() {
 func router() *gin.Engine {
 	r := gin.Default()
 
-	shops := r.Group("/shops")
+	apiv1 := r.Group("/api/v1")
 	{
-		ctrl := controller.ShopController{}
-		shops.GET("", ctrl.IndexShop)
-		shops.GET("/:id", ctrl.ShowShop)
-		shops.POST("", ctrl.CreateShop)
-		shops.PUT("/:id", ctrl.UpdateShop)
-		shops.DELETE("/:id", ctrl.DeleteShop)
-	}
+		shopCtrl := controller.ShopController{}
+		apiv1.GET("/shops", shopCtrl.IndexShop)
+		apiv1.GET("/shops/:id", shopCtrl.ShowShop)
+		apiv1.POST("/shops", shopCtrl.CreateShop)
+		apiv1.PUT("/shops/:id", shopCtrl.UpdateShop)
+		apiv1.DELETE("/shops/:id", shopCtrl.DeleteShop)
 
+		bookCtrl := controller.BookController{}
+		apiv1.GET("/books", bookCtrl.IndexBook)
+		apiv1.GET("/books/:id", bookCtrl.ShowBook)
+		apiv1.POST("/books", bookCtrl.CreateBook)
+		apiv1.PUT("/books/:id", bookCtrl.UpdateBook)
+		apiv1.DELETE("/books/:id", bookCtrl.DeleteBook)
+	}
 	return r
 }

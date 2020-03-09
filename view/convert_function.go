@@ -17,3 +17,20 @@ func convertToViewShop(before *entity.Shop) shop {
 		ShopDescription: before.ShopDescription,
 	}
 }
+
+func convertToViewBooks(before []*entity.Book) []book {
+	after := make([]book, len(before))
+	for i, p := range before {
+		after[i] = convertToViewBook(p)
+	}
+	return after
+}
+
+func convertToViewBook(before *entity.Book) book {
+	return book{
+		ID:              before.ID,
+		BookName:        before.BookName,
+		BookDescription: before.BookDescription,
+		Popularity:      before.Popularity,
+	}
+}
