@@ -111,9 +111,8 @@ $ curl localhost:10080/api/v1/shops/4 -X DELETE
 $ curl localhost:10080/api/v1/books/6 -X DELETE
 
 ```
-- 
 
 # 参照
-- 
+- 以下を参考にして作りました。
   - [日本語の記事](https://qiita.com/Asuforce/items/0bde8cabb30ac094fcb4)。
   - [深センの方が作ったサンプルAPI](https://github.com/eddycjy/go-gin-example)
