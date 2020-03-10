@@ -6,6 +6,7 @@
   - 初回はmysqlの構築のためにginの起動に失敗するので再度立ち上げて`ctrl + c`で抜けてください。
 - テーブルなどの構築は自動で行われますが勝手にレコードは入力されません。
   - `sql/mysql/seed.sql`にseedを用意しましたのでmysqlコンテナに入ってseedの中身を流し込めばサンプルレコードが作成されます。
+  - Qiitaに処理の流れを追った記事を書いたのでよろしければご覧ください。 [gin,gormを使ってgolangでRailsっぽい構成のAPIを作った](https://qiita.com/whisky-shusuky/items/8946a8ff4a40977acbf0)
 ```bash
 $ sudo docker exec -it mysql bash
 # mysql -uroot
