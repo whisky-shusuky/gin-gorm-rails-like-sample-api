@@ -1,6 +1,6 @@
 module gin-gorm-rails-like-sample-api
 
-go 1.13
+go 1.16
 
 require (
 	github.com/gin-gonic/gin v1.5.0
