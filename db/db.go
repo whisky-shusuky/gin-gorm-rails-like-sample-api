@@ -4,8 +4,8 @@ import (
 	"gin-gorm-rails-like-sample-api/config"
 	"gin-gorm-rails-like-sample-api/model/entity"
 
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql" // Use <ysql in gorm
+	"gorm.io/driver/mysql" // Use <ysql in gorm
+	"gorm.io/gorm"
 )
 
 var (
@@ -21,8 +21,7 @@ func Init() {
 		panic(err)
 	}
 
-	Db, err = gorm.Open(configs.Database.Dialect, configs.Database.DataSource)
-	Db.LogMode(true)
+	Db, err = gorm.Open(mysql.Open(configs.Database.DataSource), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
@@ -36,9 +35,8 @@ func GetDB() *gorm.DB {
 
 // Close is closing db
 func Close() {
-	if err := Db.Close(); err != nil {
-		panic(err)
-	}
+	db, _ := Db.DB()
+	defer db.Close()
 }
 
 func autoMigration() {
