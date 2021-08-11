@@ -1,6 +1,7 @@
 package db
 
 import (
+	"database/sql"
 	"gin-gorm-rails-like-sample-api/config"
 	"log"
 
@@ -49,7 +50,18 @@ func Init() (*gorm.DB, *dockertest.Pool) {
 		}
 	}
 	if err := pool.Retry(func() error {
-		dsn := "root@tcp(db)/sample?parseTime=true"
+		// create database
+		db, err := sql.Open("mysql", "root@tcp(127.0.0.1:3306)/")
+		if err != nil {
+			panic(err)
+		}
+		defer db.Close()
+		_, err = db.Exec("CREATE DATABASE sample")
+		if err != nil {
+			panic(err)
+		}
+
+		dsn := "root@tcp(127.0.0.1:3306)/sample?parseTime=true"
 		testdb, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 		if err != nil {
