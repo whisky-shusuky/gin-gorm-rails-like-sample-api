@@ -1,9 +1,9 @@
 name: test
 on:
   push:
-    branches: [ feature/add_test ]
+    branches: [ master ]
   pull_request:
-    branches: [ feature/add_test ]
+    branches: [ master ]
 jobs:
   golangci:
     services:
