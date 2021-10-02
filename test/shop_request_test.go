@@ -7,7 +7,6 @@ import (
 	"gin-gorm-rails-like-sample-api/test/helper"
 	test_db "gin-gorm-rails-like-sample-api/test/testdata/db"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -46,10 +45,14 @@ func TestShop(t *testing.T) {
 	t.Run("returns 200 when GET /", func(t *testing.T) {
 		req, _ := http.NewRequest("GET", testServer.URL+"/api/v1/shops", nil)
 		res, _ := client.Do(req)
-		body, _ := ioutil.ReadAll(res.Body)
-		log.Printf("ResponseBody:%s\n", string(body))
+		body, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			t.Error("[Error]", body, err)
+		}
 
 		assert.Equal(t, http.StatusOK, res.StatusCode)
+		expectedBody := `{"shops":[{"id":1,"shop_name":"test shop name","shop_description":"test shop description"}]}`
+		assert.JSONEq(t, expectedBody, string(body))
 	})
 
 }

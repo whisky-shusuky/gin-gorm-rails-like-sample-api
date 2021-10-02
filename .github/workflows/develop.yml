@@ -24,4 +24,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: testing
-        run: ENV_GO=citest bash -c 'go test ./...'
+        run: ENV_GO=citest bash -c 'go test ./... -v'
