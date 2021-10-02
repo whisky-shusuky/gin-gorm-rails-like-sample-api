@@ -8,11 +8,11 @@ import (
 
 // Init is initialize server
 func Init() {
-	r := router()
+	r := Router()
 	r.Run()
 }
 
-func router() *gin.Engine {
+func Router() *gin.Engine {
 	r := gin.Default()
 
 	apiv1 := r.Group("/api/v1")
