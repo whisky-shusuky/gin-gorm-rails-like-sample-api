@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"gin-gorm-rails-like-sample-api/config"
 	"log"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/ory/dockertest"
@@ -51,17 +52,26 @@ func Init() (*gorm.DB, *dockertest.Pool) {
 	}
 	if err := pool.Retry(func() error {
 		// create database
-		db, err := sql.Open("mysql", "root@tcp(127.0.0.1:3306)/")
+		env := os.Getenv("ENV_GO")
+		var datasource string
+		var dsn string
+		if env == "citest" {
+			datasource = "root@tcp(127.0.0.1:3306)/"
+			dsn = "root@tcp(127.0.0.1:3306)/sampletest?parseTime=true"
+		} else {
+			datasource = "root@tcp(db)/"
+			dsn = "root@tcp(db)/sampletest?parseTime=true"
+		}
+		db, err := sql.Open("mysql", datasource)
 		if err != nil {
 			panic(err)
 		}
 		defer db.Close()
-		_, err = db.Exec("CREATE DATABASE sample")
+		_, err = db.Exec("CREATE DATABASE IF NOT EXISTS sampletest")
 		if err != nil {
 			panic(err)
 		}
 
-		dsn := "root@tcp(127.0.0.1:3306)/sample?parseTime=true"
 		testdb, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 		if err != nil {
