@@ -42,6 +42,7 @@ func TestShop(t *testing.T) {
 	testServer := httptest.NewServer(router)
 	defer testServer.Close()
 
+	// GET /shop
 	t.Run("returns 200 when GET /", func(t *testing.T) {
 		req, _ := http.NewRequest("GET", testServer.URL+"/api/v1/shops", nil)
 		res, _ := client.Do(req)
@@ -55,4 +56,28 @@ func TestShop(t *testing.T) {
 		assert.JSONEq(t, expectedBody, string(body))
 	})
 
+	// GET /shop/:id
+	t.Run("returns 200 when GET /1", func(t *testing.T) {
+		req, _ := http.NewRequest("GET", testServer.URL+"/api/v1/shops/1", nil)
+		res, _ := client.Do(req)
+		body, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			t.Error("[Error]", body, err)
+		}
+
+		assert.Equal(t, http.StatusOK, res.StatusCode)
+		expectedBody := `{"id":1,"shop_name":"test shop name","shop_description":"test shop description"}`
+		assert.JSONEq(t, expectedBody, string(body))
+	})
+
+	t.Run("returns 404 when GET /100 (not existing id)", func(t *testing.T) {
+		req, _ := http.NewRequest("GET", testServer.URL+"/api/v1/shops/100", nil)
+		res, _ := client.Do(req)
+		body, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			t.Error("[Error]", body, err)
+		}
+
+		assert.Equal(t, http.StatusNotFound, res.StatusCode)
+	})
 }
