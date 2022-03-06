@@ -1,4 +1,9 @@
 database:
   dialect: mysql
   datasource: "root@tcp(db)/sample?parseTime=true"
-  
+  dbuser: root
+  password: ""
+  port: "3306"
+  host: "db"
+  dbname: sample
+  dbtype: mysql

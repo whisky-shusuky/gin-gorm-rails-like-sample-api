@@ -86,18 +86,12 @@ func Init() {
 	}
 
 	// migration
-	dbUser := "root"
-	dbPassword := ""
-	dbPort := "3306"
-	dbHost := "db"
-	dbName := "sample"
-	dbType := "mysql"
-
 	fmt.Println("--- Connecting Migrations ---")
-	dbConfig := buildDBConfig(dbHost, dbPort, dbUser, dbName, dbPassword, dbType)
+	dbConfig := buildDBConfig(configs.Database.Host, configs.Database.Port, configs.Database.Dbuser, configs.Database.Dbname, configs.Database.Password, configs.Database.Password)
 	dbURL := dbURL(dbConfig)
+	fmt.Println(dbURL)
 
-	m, err := migrate.New("file://db/migrations/", dbType+"://"+dbURL)
+	m, err := migrate.New("file://db/migrations/", configs.Database.Dbtype+"://"+dbURL)
 	if err != nil {
 		panic(err)
 	}
