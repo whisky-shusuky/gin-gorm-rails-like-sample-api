@@ -9,7 +9,7 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/go-testfixtures/testfixtures/v3 v3.6.1
 	github.com/golang-migrate/migrate/v4 v4.15.1
-	github.com/jinzhu/gorm v1.9.16
+	github.com/gotestyourself/gotestyourself v2.2.0+incompatible // indirect
 	github.com/ory/dockertest v3.3.5+incompatible
 	github.com/stretchr/testify v1.7.0
 	gopkg.in/yaml.v2 v2.4.0
