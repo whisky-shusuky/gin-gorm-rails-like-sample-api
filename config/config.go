@@ -11,6 +11,12 @@ import (
 type Database struct {
 	Dialect    string
 	DataSource string
+	Dbuser     string
+	Password   string
+	Port       string
+	Host       string
+	Dbname     string
+	Dbtype     string
 }
 
 // Configs is structure of configs.
@@ -31,7 +37,7 @@ func GetConfigs() (*Configs, error) {
 	b, err := ioutil.ReadFile("./config/" + env + ".yml")
 	if err != nil {
 		return nil, err
-	}	
+	}
 	err = yaml.Unmarshal(b, c)
 	if err != nil {
 		return nil, err
