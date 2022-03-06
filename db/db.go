@@ -1,6 +1,7 @@
 package db
 
 import (
+	"database/sql"
 	"fmt"
 	"gin-gorm-rails-like-sample-api/config"
 	"gin-gorm-rails-like-sample-api/model/entity"
@@ -67,11 +68,24 @@ func Init() {
 		panic(err)
 	}
 
+	// databaseが無ければ作る
+	db, err := sql.Open("mysql", "root@tcp(db)/")
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS sample")
+	if err != nil {
+		panic(err)
+	}
+
+	// gorm設定
 	Db, err = gorm.Open(mysql.Open(configs.Database.DataSource), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
 
+	// migration
 	dbUser := "root"
 	dbPassword := ""
 	dbPort := "3306"
